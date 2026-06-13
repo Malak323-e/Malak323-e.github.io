@@ -1,0 +1,1195 @@
+:root {
+    --bg: #061524;
+    --bg-soft: #0a2033;
+    --panel: rgba(255, 255, 255, 0.1);
+    --panel-strong: rgba(255, 255, 255, 0.16);
+    --line: rgba(155, 222, 255, 0.22);
+    --text: #eef8ff;
+    --muted: #a7c1d5;
+    --cyan: #35d6ff;
+    --blue: #2f80ff;
+    --navy: #0b2740;
+    --green: #42e8a3;
+    --pink: #ff7db8;
+    --amber: #ffd166;
+    --danger: #ff6b6b;
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(53, 214, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 85% 18%, rgba(47, 128, 255, 0.25), transparent 32%),
+        linear-gradient(135deg, #04111f 0%, #07192a 48%, #0b2338 100%);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(18px);
+    background: rgba(5, 18, 31, 0.74);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+}
+
+.brand-mark,
+.empty-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: #04111f;
+    background: linear-gradient(135deg, var(--cyan), #ffffff);
+    box-shadow: 0 0 28px rgba(53, 214, 255, 0.45);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-weight: 600;
+    transition: 180ms ease;
+}
+
+.nav-links a:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 72px);
+    display: grid;
+    grid-template-columns: minmax(520px, 0.98fr) minmax(420px, 1.02fr);
+    align-items: center;
+    gap: clamp(28px, 4.5vw, 76px);
+    padding: clamp(28px, 4.5vh, 54px) max(28px, calc((100vw - 1320px) / 2)) clamp(28px, 4.5vh, 54px);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 7% 4% 8% auto;
+    width: min(48vw, 720px);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(53, 214, 255, 0.14), transparent 68%);
+    filter: blur(6px);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.eyebrow {
+    margin: 0 0 14px;
+    color: var(--cyan);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: clamp(16px, 2.2vh, 22px);
+    max-width: 500px;
+    font-size: clamp(2.6rem, 4.55vw, 4.95rem);
+    line-height: 1.02;
+    letter-spacing: 0;
+}
+
+h2 {
+    margin-bottom: 14px;
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    line-height: 1.05;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+.hero-copy {
+    max-width: 700px;
+    color: var(--muted);
+    font-size: clamp(0.98rem, 1.08vw, 1.16rem);
+    line-height: 1.65;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: clamp(18px, 3vh, 28px) 0;
+}
+
+.primary-button,
+.secondary-button,
+.predict-button {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.demo-actions,
+.dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.demo-actions button,
+.export-button {
+    min-height: 40px;
+    border: 1px solid rgba(53, 214, 255, 0.28);
+    border-radius: 8px;
+    padding: 0 12px;
+    color: var(--text);
+    background: rgba(53, 214, 255, 0.08);
+    cursor: pointer;
+    font-weight: 800;
+    transition: 180ms ease;
+}
+
+.demo-actions button:hover,
+.export-button:hover {
+    background: rgba(53, 214, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+.export-button {
+    margin-left: auto;
+    color: #04111f;
+    background: linear-gradient(135deg, #ffffff, var(--cyan));
+}
+
+.primary-button,
+.predict-button {
+    color: #04111f;
+    background: linear-gradient(135deg, #ffffff, var(--cyan));
+    box-shadow: 0 16px 38px rgba(53, 214, 255, 0.26);
+}
+
+.secondary-button {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+}
+
+.hero-metrics,
+.summary-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.hero-metrics {
+    max-width: 700px;
+}
+
+.hero-metrics div,
+.summary-strip div,
+.upload-panel,
+.format-panel,
+.empty-state,
+.explainability-empty,
+.science-panel,
+.gene-panel,
+.shap-plot-panel,
+.info-card,
+.result-card {
+    border: 1px solid var(--line);
+    background: linear-gradient(145deg, var(--panel), rgba(255, 255, 255, 0.05));
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px);
+}
+
+.hero-metrics div,
+.summary-strip div {
+    min-height: 82px;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.hero-metrics strong,
+.summary-strip strong {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 1.1rem;
+}
+
+.hero-metrics span,
+.summary-strip span {
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+.hero-visual {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    min-height: min(68vh, 720px);
+}
+
+.orbital {
+    position: relative;
+    width: clamp(360px, 38vw, 620px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+
+.pulse-ring {
+    position: absolute;
+    inset: 8%;
+    border: 1px solid rgba(53, 214, 255, 0.35);
+    border-radius: 50%;
+    animation: rotate 18s linear infinite;
+}
+
+.ring-two {
+    inset: 20%;
+    border-color: rgba(255, 255, 255, 0.22);
+    animation-duration: 12s;
+    animation-direction: reverse;
+}
+
+.core {
+    width: clamp(170px, 15vw, 250px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #ffffff, rgba(53, 214, 255, 0.9) 38%, rgba(47, 128, 255, 0.4) 70%),
+        var(--cyan);
+    color: #04111f;
+    font-weight: 900;
+    font-size: clamp(2.3rem, 4vw, 3.9rem);
+    box-shadow: 0 0 80px rgba(53, 214, 255, 0.55);
+}
+
+.node {
+    position: absolute;
+    width: 22px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 28px var(--cyan);
+}
+
+.node-a {
+    top: 12%;
+    left: 42%;
+}
+
+.node-b {
+    right: 10%;
+    bottom: 28%;
+}
+
+.node-c {
+    left: 16%;
+    bottom: 22%;
+}
+
+.section {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 74px 0;
+}
+
+.section-heading {
+    max-width: 760px;
+    margin-bottom: 28px;
+}
+
+.section-heading p:not(.eyebrow) {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.upload-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 22px;
+}
+
+.upload-panel,
+.format-panel,
+.empty-state,
+.explainability-empty,
+.science-panel,
+.gene-panel,
+.shap-plot-panel,
+.info-card,
+.result-card {
+    border-radius: 8px;
+}
+
+.upload-panel,
+.format-panel {
+    padding: 22px;
+}
+
+.validation-alert {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid rgba(255, 107, 107, 0.38);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(255, 107, 107, 0.18), rgba(53, 214, 255, 0.06)),
+        rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 50px rgba(255, 107, 107, 0.1);
+}
+
+.validation-alert[hidden] {
+    display: none;
+}
+
+.alert-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--danger), #ffb3b3);
+    font-weight: 900;
+}
+
+.validation-alert strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.validation-alert p {
+    margin-bottom: 8px;
+    color: #ffd8d8;
+    line-height: 1.55;
+}
+
+.validation-alert ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.drop-zone {
+    min-height: 240px;
+    display: grid;
+    place-items: center;
+    gap: 10px;
+    text-align: center;
+    border: 1px dashed rgba(53, 214, 255, 0.58);
+    border-radius: 8px;
+    background: rgba(53, 214, 255, 0.06);
+    transition: 180ms ease;
+}
+
+.drop-zone.is-dragover {
+    border-color: #ffffff;
+    background: rgba(53, 214, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(53, 214, 255, 0.14);
+    color: var(--cyan);
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.drop-zone small,
+.status-message,
+.format-panel li,
+.info-card p,
+.result-card p {
+    color: var(--muted);
+}
+
+.predict-button {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.predict-button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.button-glow {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.66), transparent);
+}
+
+.predict-button.is-loading .button-glow {
+    animation: shimmer 1.2s linear infinite;
+}
+
+.format-panel ul {
+    margin: 16px 0 0;
+    padding-left: 18px;
+    line-height: 1.8;
+}
+
+.status-message {
+    min-height: 22px;
+    margin: 14px 0 0;
+}
+
+.status-message.is-error {
+    color: var(--danger);
+}
+
+.status-message.is-success {
+    color: var(--green);
+}
+
+.empty-state {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.empty-state[hidden],
+.results-dashboard[hidden],
+.explainability-empty[hidden],
+.explainability-dashboard[hidden],
+.insights-empty[hidden],
+.insight-card[hidden],
+.shap-plot-panel img[hidden] {
+    display: none;
+}
+
+.explainability-empty {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.explainability-empty .empty-mark {
+    width: 58px;
+}
+
+.empty-mark {
+    margin-bottom: 12px;
+}
+
+.results-dashboard {
+    display: grid;
+    gap: 18px;
+}
+
+.explainability-dashboard {
+    display: grid;
+    gap: 18px;
+}
+
+.science-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: 22px;
+    padding: 24px;
+}
+
+.science-panel p:not(.eyebrow) {
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+.biomarker-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    gap: 10px;
+}
+
+.biomarker-chips span,
+.mini-explainability span {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    border: 1px solid rgba(53, 214, 255, 0.28);
+    border-radius: 999px;
+    padding: 0 12px;
+    color: #dff8ff;
+    background: rgba(53, 214, 255, 0.1);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.explainability-grid {
+    display: grid;
+    grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr);
+    gap: 18px;
+}
+
+.gene-panel,
+.shap-plot-panel {
+    padding: 22px;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.panel-heading span {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.panel-heading strong {
+    text-align: right;
+}
+
+.gene-bars {
+    display: grid;
+    gap: 14px;
+}
+
+.gene-bar-row {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 84px;
+    align-items: center;
+    gap: 12px;
+}
+
+.gene-rank {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: var(--cyan);
+    background: rgba(53, 214, 255, 0.1);
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.gene-name {
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.gene-track {
+    height: 9px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.gene-track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--blue), var(--cyan), #ffffff);
+    box-shadow: 0 0 18px rgba(53, 214, 255, 0.45);
+}
+
+.gene-score {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.shap-plot-panel img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.result-grid,
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.result-card,
+.info-card {
+    padding: 22px;
+}
+
+.result-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: var(--cyan);
+}
+
+.result-visuals {
+    display: grid;
+    grid-template-columns: 140px 120px;
+    align-items: center;
+    gap: 18px;
+    margin: 18px 0;
+}
+
+.confidence-dial {
+    width: 132px;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center, #0b2136 0 54%, transparent 55%),
+        conic-gradient(var(--cyan) var(--confidence), rgba(255, 255, 255, 0.12) 0);
+    box-shadow: 0 0 36px rgba(53, 214, 255, 0.22);
+    animation: dialIn 900ms ease both;
+}
+
+.confidence-dial strong {
+    margin-top: 24px;
+    font-size: 1.45rem;
+}
+
+.confidence-dial span {
+    margin-top: -26px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+}
+
+.pie-chart {
+    width: 112px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 34px rgba(53, 214, 255, 0.2);
+    animation: dialIn 900ms ease both;
+}
+
+.result-card.low-risk::before {
+    background: var(--green);
+}
+
+.result-card.sle::before {
+    background: var(--pink);
+}
+
+.result-card.ra::before {
+    background: var(--amber);
+}
+
+.sample-id {
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+.prediction-label {
+    font-size: 1.45rem;
+    font-weight: 900;
+}
+
+.confidence {
+    margin: 18px 0;
+}
+
+.confidence strong {
+    display: block;
+    font-size: 2.6rem;
+}
+
+.probabilities {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.histogram-card {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(53, 214, 255, 0.16);
+}
+
+.histogram-card strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
+.histogram {
+    height: 92px;
+    display: flex;
+    align-items: end;
+    gap: 4px;
+}
+
+.histogram span {
+    flex: 1;
+    min-width: 4px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(180deg, #ffffff, var(--cyan), var(--blue));
+    box-shadow: 0 0 12px rgba(53, 214, 255, 0.3);
+    animation: growBar 800ms ease both;
+}
+
+.insights-empty,
+.insight-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: linear-gradient(145deg, var(--panel), rgba(255, 255, 255, 0.05));
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px);
+}
+
+.insights-empty {
+    min-height: 210px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.insight-card {
+    position: relative;
+    overflow: hidden;
+    padding: 28px;
+}
+
+.insight-card h3 {
+    font-size: 1.65rem;
+}
+
+.insight-card p:not(.eyebrow) {
+    max-width: 880px;
+    color: var(--muted);
+    line-height: 1.85;
+}
+
+.insight-orbit {
+    position: absolute;
+    right: -70px;
+    top: -70px;
+    width: 220px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(53, 214, 255, 0.25);
+    box-shadow: inset 0 0 40px rgba(53, 214, 255, 0.12), 0 0 70px rgba(53, 214, 255, 0.14);
+}
+
+.analysis-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(2, 9, 18, 0.82);
+    backdrop-filter: blur(18px);
+}
+
+.analysis-overlay[hidden] {
+    display: none;
+}
+
+.analysis-loader {
+    width: min(560px, 100%);
+    border: 1px solid rgba(53, 214, 255, 0.28);
+    border-radius: 8px;
+    padding: 34px;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(8, 32, 52, 0.92), rgba(255, 255, 255, 0.08));
+    box-shadow: 0 0 90px rgba(53, 214, 255, 0.22);
+}
+
+.scanner-core {
+    position: relative;
+    width: 150px;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 18px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid rgba(53, 214, 255, 0.35);
+    background: radial-gradient(circle, rgba(53, 214, 255, 0.2), rgba(47, 128, 255, 0.05));
+}
+
+.scanner-core span {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--cyan);
+}
+
+.scan-line {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0 42%, rgba(53, 214, 255, 0.7) 50%, transparent 58% 100%);
+    animation: scan 1.45s linear infinite;
+}
+
+.dna-loader {
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+}
+
+.dna-loader span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: dna 1.1s ease-in-out infinite;
+}
+
+.dna-loader span:nth-child(2) { animation-delay: 0.1s; }
+.dna-loader span:nth-child(3) { animation-delay: 0.2s; }
+.dna-loader span:nth-child(4) { animation-delay: 0.3s; }
+.dna-loader span:nth-child(5) { animation-delay: 0.4s; }
+.dna-loader span:nth-child(6) { animation-delay: 0.5s; }
+
+.analysis-loader p {
+    color: var(--cyan);
+    font-weight: 700;
+}
+
+.neural-grid {
+    height: 72px;
+    margin-top: 18px;
+    border-radius: 8px;
+    background:
+        linear-gradient(rgba(53, 214, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53, 214, 255, 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+    animation: gridFlow 1.8s linear infinite;
+}
+
+.mini-explainability {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+}
+
+.mini-explainability strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+}
+
+.mini-explainability div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.explain-button {
+    width: 100%;
+    min-height: 42px;
+    margin-top: 16px;
+    border: 1px solid rgba(53, 214, 255, 0.35);
+    border-radius: 8px;
+    color: var(--text);
+    background: rgba(53, 214, 255, 0.09);
+    cursor: pointer;
+    font-weight: 800;
+    transition: 180ms ease;
+}
+
+.explain-button:hover {
+    background: rgba(53, 214, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+.probability-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 3fr 64px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.86rem;
+}
+
+.bar {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+
+.card-index {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    color: var(--cyan);
+    background: rgba(53, 214, 255, 0.1);
+}
+
+.footer {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 30px 0 42px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    to {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes dialIn {
+    from {
+        opacity: 0;
+        transform: scale(0.88);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes growBar {
+    from {
+        height: 0;
+    }
+}
+
+@keyframes scan {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes dna {
+    0%, 100% {
+        transform: translateY(-16px);
+        opacity: 0.55;
+    }
+    50% {
+        transform: translateY(16px);
+        opacity: 1;
+    }
+}
+
+@keyframes gridFlow {
+    to {
+        background-position: 22px 22px;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero,
+    .upload-layout,
+    .science-panel,
+    .explainability-grid,
+    .result-grid,
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 48px 20px 34px;
+        gap: 18px;
+    }
+
+    .hero-visual {
+        min-height: 330px;
+        order: -1;
+    }
+
+    .orbital {
+        width: min(420px, 78vw);
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: clamp(2.35rem, 9.8vw, 4rem);
+    }
+}
+
+@media (max-width: 640px) {
+    .nav {
+        width: min(100% - 28px, 1180px);
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .hero,
+    .section,
+    .footer {
+        width: min(100% - 28px, 1180px);
+    }
+
+    .hero {
+        width: 100%;
+        padding: 34px 14px 28px;
+    }
+
+    .hero-visual {
+        min-height: 260px;
+    }
+
+    .orbital {
+        width: min(310px, 82vw);
+    }
+
+    .core {
+        width: 138px;
+    }
+
+    .hero-copy {
+        line-height: 1.65;
+    }
+
+    .hero-metrics,
+    .summary-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions,
+    .footer {
+        flex-direction: column;
+    }
+
+    .probability-row {
+        grid-template-columns: 1fr;
+    }
+
+    .result-visuals {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .gene-bar-row {
+        grid-template-columns: 34px minmax(0, 1fr);
+    }
+
+    .gene-score {
+        grid-column: 2;
+        text-align: left;
+    }
+}

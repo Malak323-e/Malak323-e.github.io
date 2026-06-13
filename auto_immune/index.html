@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoImmune AI | Clinical Prediction Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <a class="brand" href="#top" aria-label="AutoImmune AI home">
+                <span class="brand-mark">AI</span>
+                <span>AutoImmune AI</span>
+            </a>
+            <div class="nav-links" aria-label="Primary navigation">
+                <a href="#upload">Predict</a>
+                <a href="#results">Results</a>
+                <a href="#explainability">Explainability</a>
+                <a href="#about">Platform</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Gene expression intelligence for autoimmune screening</p>
+                <h1>AI-assisted prediction for Healthy, Lupus, and Rheumatoid Arthritis profiles.</h1>
+                <p class="hero-copy">
+                    Upload a CSV expression matrix and receive model-driven class probabilities from your trained ML pipeline.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-button" href="#upload">Run Prediction</a>
+                    <a class="secondary-button" href="#about">Explore Model</a>
+                </div>
+                <div class="hero-metrics" aria-label="Model summary">
+                    <div>
+                        <strong>{{ gene_count }}</strong>
+                        <span>trained genes</span>
+                    </div>
+                    <div>
+                        <strong>3</strong>
+                        <span>clinical classes</span>
+                    </div>
+                    <div>
+                        <strong>{{ model_name }}</strong>
+                        <span>active model</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbital">
+                    <div class="pulse-ring ring-one"></div>
+                    <div class="pulse-ring ring-two"></div>
+                    <div class="core">
+                        <span>DNA</span>
+                    </div>
+                    <div class="node node-a"></div>
+                    <div class="node node-b"></div>
+                    <div class="node node-c"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section upload-band" id="upload">
+            <div class="section-heading">
+                <p class="eyebrow">Prediction console</p>
+                <h2>Upload gene expression CSV</h2>
+                <p>
+                    Accepted formats: samples as rows with gene symbols as columns, or genes as rows with sample expression columns.
+                </p>
+            </div>
+
+            <div class="upload-layout">
+                <form class="upload-panel" id="uploadForm">
+                    <label class="drop-zone" id="dropZone" for="csvFile">
+                        <input type="file" id="csvFile" name="file" accept=".csv" hidden>
+                        <span class="upload-icon">+</span>
+                        <strong id="fileName">Drop CSV file here or browse</strong>
+                        <small>Maximum file size: 20 MB</small>
+                    </label>
+                    <button class="predict-button" type="submit">
+                        <span class="button-glow"></span>
+                        Analyze Expression Profile
+                    </button>
+                    <div class="demo-actions" aria-label="Presentation demo modes">
+                        <button type="button" data-demo="healthy">Demo Healthy</button>
+                        <button type="button" data-demo="lupus">Demo Lupus</button>
+                        <button type="button" data-demo="polyarthrite">Demo Polyarthrite</button>
+                        <button type="button" data-demo="borderline">Demo Borderline</button>
+                    </div>
+                    <p class="status-message" id="statusMessage" role="status"></p>
+                    <div class="validation-alert" id="validationAlert" hidden>
+                        <div class="alert-icon">!</div>
+                        <div>
+                            <strong id="alertTitle">Invalid gene expression file</strong>
+                            <p id="alertMessage"></p>
+                            <ul id="alertDetails"></ul>
+                        </div>
+                    </div>
+                </form>
+
+                <aside class="format-panel">
+                    <h3>CSV checklist</h3>
+                    <ul>
+                        <li>Gene identifiers should be gene symbols like IFI27, POLR2A, RSAD2.</li>
+                        <li>Expression values must be numeric.</li>
+                        <li>At least 50% of trained genes should be present.</li>
+                        <li>Multiple samples can be predicted in one upload.</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section results-section" id="results">
+            <div class="section-heading">
+                <p class="eyebrow">Clinical AI output</p>
+                <h2>Prediction results</h2>
+                <p>Results appear here after analysis, including class confidence percentages and gene coverage.</p>
+            </div>
+
+            <div class="empty-state" id="emptyState">
+                <div class="empty-mark">AI</div>
+                <p>No prediction yet. Upload a CSV file to activate the diagnostic dashboard.</p>
+            </div>
+
+            <div class="results-dashboard" id="resultsDashboard" hidden>
+                <div class="summary-strip">
+                    <div>
+                        <span>Model</span>
+                        <strong id="summaryModel">-</strong>
+                    </div>
+                    <div>
+                        <span>Samples</span>
+                        <strong id="summarySamples">-</strong>
+                    </div>
+                    <div>
+                        <span>Gene coverage</span>
+                        <strong id="summaryCoverage">-</strong>
+                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="export-button" id="exportPdfButton" type="button">Export PDF Report</button>
+                </div>
+                <div class="result-grid" id="resultGrid"></div>
+            </div>
+        </section>
+
+        <section class="section insights-section" id="insights">
+            <div class="section-heading">
+                <p class="eyebrow">AI Insights</p>
+                <h2>Biomedical interpretation</h2>
+                <p>Professional model-generated interpretation appears after prediction, summarizing confidence, biomarkers, and disease-signature context.</p>
+            </div>
+
+            <div class="insights-empty" id="insightsEmpty">
+                <div class="empty-mark">AI</div>
+                <p>Run a prediction to generate biomedical AI insights.</p>
+            </div>
+
+            <div class="insight-card" id="insightCard" hidden>
+                <div class="insight-orbit" aria-hidden="true"></div>
+                <p class="eyebrow">Generated interpretation</p>
+                <h3 id="insightTitle">-</h3>
+                <p id="insightText"></p>
+            </div>
+        </section>
+
+        <section class="section explainability-section" id="explainability">
+            <div class="section-heading">
+                <p class="eyebrow">AI Explainability</p>
+                <h2>Biomarker-level model interpretation</h2>
+                <p>
+                    SHAP explainability highlights the genes that most strongly influence the model's disease prediction.
+                    These visualizations support transparent biomedical AI analysis by surfacing candidate biomarkers and
+                    class-specific expression patterns.
+                </p>
+            </div>
+
+            <div class="explainability-empty" id="explainabilityEmpty">
+                <div class="empty-mark">SHAP</div>
+                <p>Run a prediction to reveal class-specific SHAP biomarkers, bar charts, and summary plots.</p>
+            </div>
+
+            <div class="explainability-dashboard" id="explainabilityDashboard" hidden>
+                <div class="science-panel">
+                    <div>
+                        <p class="eyebrow">Scientific interpretation</p>
+                        <h3>How the model explains its decision</h3>
+                        <p>
+                            SHAP estimates how each gene shifts the model toward or away from a class. The top genes below
+                            represent influential molecular signals used by the classifier for the predicted autoimmune profile.
+                        </p>
+                    </div>
+                    <div class="biomarker-chips" id="globalGeneChips"></div>
+                </div>
+
+                <div class="explainability-grid">
+                    <div class="gene-panel">
+                        <div class="panel-heading">
+                            <span>Top 10 genes</span>
+                            <strong id="explainabilityClassName">-</strong>
+                        </div>
+                        <div class="gene-bars" id="geneBars"></div>
+                    </div>
+
+                    <div class="shap-plot-panel">
+                        <div class="panel-heading">
+                            <span>SHAP summary plot</span>
+                            <strong id="summaryPlotTitle">-</strong>
+                        </div>
+                        <img id="shapSummaryImage" alt="SHAP summary plot for predicted class">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section about-section" id="about">
+            <div class="section-heading">
+                <p class="eyebrow">About the AI engine</p>
+                <h2>Built for interpretable biomedical ML demonstrations</h2>
+            </div>
+
+            <div class="about-grid">
+                <article class="info-card">
+                    <span class="card-index">01</span>
+                    <h3>Expression alignment</h3>
+                    <p>Uploaded genes are aligned to the trained gene list before scaling, preserving the same feature order used during model training.</p>
+                </article>
+                <article class="info-card">
+                    <span class="card-index">02</span>
+                    <h3>Probability scoring</h3>
+                    <p>The backend returns per-class probabilities for Healthy, Lupus (SLE), and Rheumatoid Arthritis.</p>
+                </article>
+                <article class="info-card">
+                    <span class="card-index">03</span>
+                    <h3>Research disclaimer</h3>
+                    <p>This university project is for educational ML exploration and is not a medical diagnosis system.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>AutoImmune AI</span>
+        <span>Machine Learning project for autoimmune disease prediction</span>
+    </footer>
+
+    <div class="analysis-overlay" id="analysisOverlay" hidden>
+        <div class="analysis-loader">
+            <div class="scanner-core">
+                <span>AI</span>
+                <div class="scan-line"></div>
+            </div>
+            <div class="dna-loader" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h2>AI genomic analysis in progress</h2>
+            <p id="loadingPhase">Scanning expression matrix...</p>
+            <div class="neural-grid" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
